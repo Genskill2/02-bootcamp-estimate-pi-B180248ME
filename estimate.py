@@ -2,16 +2,20 @@ import math
 import unittest
 import random
 def wallis(n):
-    a=1
+    a=2
     for i in range(1,n+1):
-        a=a*((2*n)/(2*n-1))*((2*n)/(2*n+1))
-    return (a*2)
+        l=(2.0*i)/((2.0*i)-1.0)
+        r=(2.0*i)/((2.0*i)+1.0)
+        a=a*l*r
+    return a
 def monte_carlo(m):
     c=0
     for i in range(1,m+1):
-        x=(2*random.random())
-        y=(2*random.random())
-        d=(x**2+y**2)**0.5
+        x=(random.random())
+        y=(random.random())
+        x1=x**2
+        y1=y**2
+        d=math.sqrt(x1+y1)
         if(d<=1):
             c+=1
     b=((4*c)/m)
