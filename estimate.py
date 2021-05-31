@@ -1,10 +1,27 @@
 import math
 import unittest
-
+import random
+def wallis(n):
+    a=1
+    for i in range(1,n+1):
+        a=a*((2*n)/(2*n-1))*((2*n)/(2*n+1))
+    return (a*2)
+def monte_carlo(m):
+    c=0
+    for i in range(1,m+1):
+        x=(2*random.random())
+        y=(2*random.random())
+        d=(x**2+y**2)**0.5
+        if(d<=1):
+            c+=1
+    b=((4*c)/m)
+    return b
 class TestWallis(unittest.TestCase):
+   
     def test_low_iters(self):
         for i in range(0, 5):
             pi = wallis(i)
+            print(pi)
             self.assertTrue(abs(pi - math.pi) > 0.15, msg=f"Estimate with just {i} iterations is {pi} which is too accurate.\n")
             
     def test_high_iters(self):
@@ -14,6 +31,7 @@ class TestWallis(unittest.TestCase):
 
 
 class TestMC(unittest.TestCase):
+
     def test_randomness(self):
         pi0 = monte_carlo(15000)
         pi1 = monte_carlo(15000)
